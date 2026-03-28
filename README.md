@@ -32,14 +32,14 @@
 ```python
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        if not preorder:                                            # 边界条件：如果前序序列为空，说明没有任何节点了
-            return None                                             # 直接返回空值，代表这里是一片空气（无子树）
-        left_size = inorder.index(preorder[0])                      # 核心定位：拿前序的第一个元素（根）去中序里找索引，索引值刚好等于左子树的节点个数
-        left = self.buildTree(preorder[1: 1 + left_size],           # 递归拼装左子树：前序切出 [紧跟根节点后面的 left_size 个元素]
-                              inorder[:left_size])                  #              中序切出 [根节点前面的所有元素]
-        right = self.buildTree(preorder[1 + left_size:],            # 递归拼装右子树：前序切出 [剩下的所有元素]
-                               inorder[1 + left_size:])             #              中序切出 [根节点后面的所有元素]
-        return TreeNode(preorder[0], left, right)                   # 将提取出的根节点数值，以及拼装好的左右子树，组装成一个完整的树节点并向上返回
+        if not preorder:                   # 边界条件：如果前序序列为空，说明没有任何节点了
+            return None                                    # 直接返回空值，代表这里是一片空气（无子树）
+        left_size = inorder.index(preorder[0])             # 核心定位：拿前序的第一个元素（根）去中序里找索引，索引值刚好等于左子树的节点个数
+        left = self.buildTree(preorder[1: 1 + left_size],  # 递归拼装左子树：前序切出 [紧跟根节点后面的 left_size 个元素]
+                              inorder[:left_size])         # 中序切出 [根节点前面的所有元素]
+        right = self.buildTree(preorder[1 + left_size:],   # 递归拼装右子树：前序切出 [剩下的所有元素]
+                               inorder[1 + left_size:])    # 中序切出 [根节点后面的所有元素]
+        return TreeNode(preorder[0], left, right)          # 将提取出的根节点数值，以及拼装好的左右子树，组装成一个完整的树节点并向上返回
 ```
 
 -----
